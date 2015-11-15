@@ -1,0 +1,2 @@
+defmodule Bingogen do
+end
