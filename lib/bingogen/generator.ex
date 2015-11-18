@@ -57,7 +57,6 @@ defmodule Generator do
 
 	defp read_bingo_candidates(file) do
 		binary = File.read!(file)
-		String.split(binary, "\n")
 
 		binary 
 		|> String.split("\n")
