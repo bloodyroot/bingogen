@@ -9,16 +9,7 @@ defmodule Generator do
 		# write header
 		write_bingo_header(output_file, description)
 
-		# TODO: switch between take(24) and take(25) incl List.insert_at(12, "BINGO") byswitch
-
 		# generate lines
-#		list
-#		|> Enum.shuffle
-#		|> Enum.take(24)
-#		|> List.insert_at(12, "BINGO")
-#		|> Enum.chunk(5, 5)
-#		|> Enum.each(fn([a, b, c, d ,e]) -> write_bingo_line(output_file, a, b, c, d, e) end)
-
 		list
 		|> Enum.shuffle
 		|> build_list(no_joker)
