@@ -15,8 +15,10 @@ defmodule Bingogen.CLI do
     case parse do
       { [help: true], _, _ }
         -> :help
-      { _, [input_file, output_file], _ }
-        -> {input_file, output_file}
+      #{ _, [input_file, output_file], _ }
+      #  -> {input_file, output_file}
+      { _, [input_file, output_file, description], _ }
+        -> {input_file, output_file, description}
         _       -> :help
     end
   end
@@ -28,7 +30,7 @@ defmodule Bingogen.CLI do
     System.halt(0)
   end
 
-  def process({input_file, output_file}) do
-    Generator.build(input_file, output_file)
+  def process({input_file, output_file, description}) do
+    Generator.build(input_file, output_file, description)
   end
 end
