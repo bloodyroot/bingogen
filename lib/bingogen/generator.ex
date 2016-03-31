@@ -1,5 +1,5 @@
 defmodule Generator do
-	def build(input_file, output_file, description) do
+	def build(input_file, output_file, description, no_joker) do
 		# initialize random seed
 		init_random()
 
@@ -12,12 +12,20 @@ defmodule Generator do
 		# TODO: switch between take(24) and take(25) incl List.insert_at(12, "BINGO") byswitch
 
 		# generate lines
+#		list
+#		|> Enum.shuffle
+#		|> Enum.take(24)
+#		|> List.insert_at(12, "BINGO")
+#		|> Enum.chunk(5, 5)
+#		|> Enum.each(fn([a, b, c, d ,e]) -> write_bingo_line(output_file, a, b, c, d, e) end)
+
 		list
 		|> Enum.shuffle
-		|> Enum.take(24)
-		|> List.insert_at(12, "BINGO")
+		|> build_list(no_joker)
 		|> Enum.chunk(5, 5)
 		|> Enum.each(fn([a, b, c, d ,e]) -> write_bingo_line(output_file, a, b, c, d, e) end)
+
+
 
 		# write footer
 		write_bingo_footer(output_file)
@@ -25,6 +33,17 @@ defmodule Generator do
 
 	defp init_random() do
 		:random.seed(:os.timestamp)
+	end
+
+	defp build_list(entries, false) do
+		entries
+		|> Enum.take(24)
+		|> List.insert_at(12, "BINGO")
+	end
+
+	defp build_list(entries, true) do
+		entries
+		|> Enum.take(25)
 	end
 
 	defp write_bingo_line(file, a, b, c, d, e) do
